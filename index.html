@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prallex scrolling Landing Page Project</title>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+
+    <body>
+        <div class="product-link-section prallex-scrolling">
+            <div class="prallex-image-box" data-elf-int="move-up" data-elf-triggerhook="1">
+                <img src="./images/sample 2.png" alt="prallex-modal-img" class="prallex-img"  data-elf-scale="1.3" data-elf-y="20%">
+            </div>
+            <div class="prallex-container">
+                <div class="prallex-product-contbox">
+                    <ul class="list--product-box">
+                        <li class="product-list-items-box">
+                            <div class="product-list-details zoom-up effect-elf" data-elf="parallax">
+                                
+                                <h2>Brillante 2.0</h2>
+                            <img src="./images/Brillante 2.0 9000.png" width="90" class="modal-img" alt="robo-modal-img">
+                            <div class="button-box">
+                                <a href="/" class="btn--style">Buy Now</a>
+                                <a href="/" class="btn--style">Take Quiz</a>
+                            </div>
+                            </div>
+                            <div class="product-list-details zoom-up effect-elf" data-elf="parallax">
+                                
+                                <h2>Brillante</h2>
+                            <img src="./images/Brillante.png" width="90" class="modal-img" alt="robo-modal-img">
+                            <div class="button-box">
+                                <a href="/" class="btn--style">Buy Now</a>
+                                <a href="/" class="btn--style">Take Quiz</a>
+                            </div>
+                            </div>
+                            <div class="product-list-details zoom-up effect-elf" data-elf="parallax">
+                                
+                                <h2>Cole</h2>
+                            <img src="./images/Cole.png" width="90" class="modal-img" alt="robo-modal-img">
+                            <div class="button-box">
+                                <a href="/" class="btn--style">Buy Now</a>
+                                <a href="/" class="btn--style">Take Quiz</a>
+                            </div>
+                            </div>
+                        </li>
+                        <li class="product-list-items-box">
+                            <div class="product-list-details zoom-up effect-elf" data-elf="parallax">
+                                
+                                <h2>Feath</h2>
+                            <img src="./images/Fèath.png" width="90" class="modal-img" alt="robo-modal-img">
+                            <div class="button-box">
+                                <a href="/" class="btn--style">Buy Now</a>
+                                <a href="/" class="btn--style">Take Quiz</a>
+                            </div>
+                            </div>
+                          
+                            <div class="product-list-details zoom-up effect-elf" data-elf="parallax">
+                                
+                                <h2>Lilac</h2>
+                            <img src="./images/Lilac.png" width="90" class="modal-img" alt="robo-modal-img">
+                            <div class="button-box">
+                                <a href="/" class="btn--style">Buy Now</a>
+                                <a href="/" class="btn--style">Take Quiz</a>
+                            </div>
+                            </div>
+                        </li>
+                         <li class="product-list-items-box">
+                            <div class="product-list-details zoom-up effect-elf" data-elf="parallax">
+                                
+                                <h2>Raptor</h2>
+                            <img src="./images/Raptor.png" width="90" class="modal-img" alt="robo-modal-img">
+                            <div class="button-box">
+                                <a href="/" class="btn--style">Buy Now</a>
+                                <a href="/" class="btn--style">Take Quiz</a>
+                            </div>
+                            </div>
+                            <div class="product-list-details zoom-up effect-elf" data-elf="parallax">
+                                
+                                <h2>Sophia</h2>
+                            <img src="./images/Sophia.png" width="90" class="modal-img" alt="robo-modal-img">
+                            <div class="button-box">
+                                <a href="/" class="btn--style">Buy Now</a>
+                                <a href="/" class="btn--style">Take Quiz</a>
+                            </div>
+                            </div>
+                            <div class="product-list-details zoom-up effect-elf" data-elf="parallax">
+                                
+                                <h2>Terra</h2>
+                            <img src="./images/Terra.png" width="90" class="modal-img" alt="robo-modal-img">
+                            <div class="button-box">
+                                <a href="/" class="btn--style">Buy Now</a>
+                                <a href="/" class="btn--style">Take Quiz</a>
+                            </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="product--branding-video">
+            <div class="prallex-container">
+                <div class="product--promo-video-box">
+                    <video controls="" muted="" class="back-video" onClick="playpause()" id="Video" >
+                          <source src="./images/i.mp4" type="video/mp4" >
+                    </video>
+                    <button type="button" class="video-control-btn" id="videoCtrlBtn">btn</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="./js/jquery-3.6.1.min.js"></script>
+        <script src="./js/gsap.min.js"></script>
+        <script src="./js/scroll-magic-anim.js"></script>
+        <script src="./js/elf-anim-int.js"></script>
+        <script src="./js/index.js"></script>
+        <script type="text/javascript">
+            var videoBtn = document.getElementById("Video");
+            function playpause(){
+                if(videoBtn.paused){
+                    videoBtn.play();
+                    document.getElementById("videoCtrlBtn").style.display = "none";
+                }
+                else{
+                    videoBtn.pause();
+                    document.getElementById("videoCtrlBtn").style.display = "block";
+                }
+            }
+        </script>
+    </body>
+
+</html>
