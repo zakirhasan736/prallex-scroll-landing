@@ -1,19 +1,4 @@
-function SliderProject() {
-    $(".slider-project .swiper-container").each(function (e) {
-        new Swiper(this, {
-            slidesPerView: "auto",
-            spaceBetween: 60,
-            navigation: {
-                nextEl: $(this).parents(".slider-project").find(".slider-button-next"),
-                prevEl: $(this).parents(".slider-project").find(".slider-button-prev")
-            },
-            pagination: {
-                el: $(this).parents(".slider-project").find(".swiper-pagination"),
-                type: "fraction"
-            }
-        })
-    })
-}
+
 
 function data_overlay() {
     $("[data-overlay-color]").each(function (e) {
@@ -30,194 +15,7 @@ function background() {
     })
 }
 
-function slick_client(e) {
-    var t = $(".client-curs");
-    t.length > 0 && (t.slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: !0,
-        infinite: !0,
-        nextArrow: '<i class="fas fa-angle-right"></i>',
-        prevArrow: '<i class="fas fa-angle-left"></i>',
-        cssEase: "cubic-bezier(.9, .03, .41, .49)",
-        speed: 700
-    }), e.width() > 991 && (dsnGrid.parallaxMoveElemnt(t.find(".fas.fa-angle-right"), 25), dsnGrid.parallaxMoveElemnt(t.find(".fas.fa-angle-left"), 25)))
-}
-
-function contactValidator() {
-    var e = $("#contact-form");
-    e < 1 || (e.validator(), e.on("submit", function (t) {
-        if (!t.isDefaultPrevented()) {
-            return $.ajax({
-                type: "POST",
-                url: "contact.php",
-                data: $(this).serialize(),
-                success: function (t) {
-                    var n = "alert-" + t.type,
-                        a = t.message,
-                        i = '<div class="alert ' + n + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + a + "</div>";
-                    n && a && (e.find(".messages").html(i), e[0].reset()), setTimeout(function () {
-                        e.find(".messages").html("")
-                    }, 3e3)
-                },
-                error: function (e) {
-                    console.log(e)
-                }
-            }), !1
-        }
-    }))
-}
-
-function initMap() {
-    var e = document.getElementById("map"),
-        t = document.getElementById("map_api");
-    if (null !== e) {
-        if (null === t) {
-            var n = document.createElement("script");
-            n.type = "text/javascript", n.id = "map_api", n.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA49hGCmzG22gXOfg784H0w8DtKEsSvq7k", document.body.appendChild(n)
-        }
-        setTimeout(function () {
-            try {
-                var t = $("#map"),
-                    n = t.data("dsn-lat"),
-                    a = t.data("dsn-len"),
-                    i = t.data("dsn-zoom"),
-                    o = new google.maps.LatLng(n, a),
-                    s = new google.maps.Map(e, {
-                        center: {
-                            lat: n,
-                            lng: a
-                        },
-                        zoom: i,
-                        styles: [{
-                            featureType: "all",
-                            elementType: "labels.text.fill",
-                            stylers: [{
-                                saturation: 36
-                            }, {
-                                color: "#000000"
-                            }, {
-                                lightness: 40
-                            }]
-                        }, {
-                            featureType: "all",
-                            elementType: "labels.text.stroke",
-                            stylers: [{
-                                visibility: "on"
-                            }, {
-                                color: "#000000"
-                            }, {
-                                lightness: 16
-                            }]
-                        }, {
-                            featureType: "all",
-                            elementType: "labels.icon",
-                            stylers: [{
-                                visibility: "off"
-                            }]
-                        }, {
-                            featureType: "administrative",
-                            elementType: "geometry.fill",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 20
-                            }]
-                        }, {
-                            featureType: "administrative",
-                            elementType: "geometry.stroke",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 17
-                            }, {
-                                weight: 1.2
-                            }]
-                        }, {
-                            featureType: "landscape",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 20
-                            }]
-                        }, {
-                            featureType: "poi",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 21
-                            }]
-                        }, {
-                            featureType: "road.highway",
-                            elementType: "geometry.fill",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 17
-                            }]
-                        }, {
-                            featureType: "road.highway",
-                            elementType: "geometry.stroke",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 29
-                            }, {
-                                weight: .2
-                            }]
-                        }, {
-                            featureType: "road.arterial",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 18
-                            }]
-                        }, {
-                            featureType: "road.local",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 16
-                            }]
-                        }, {
-                            featureType: "transit",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 19
-                            }]
-                        }, {
-                            featureType: "water",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 17
-                            }]
-                        }]
-                    });
-                google.maps.event.addDomListener(window, "resize", function () {
-                    var e = s.getCenter();
-                    google.maps.event.trigger(s, "resize"), s.setCenter(e)
-                });
-                new google.maps.Marker({
-                    position: o,
-                    animation: google.maps.Animation.BOUNCE,
-                    icon: "assets/img/map-marker.png",
-                    title: "ASL",
-                    map: s
-                })
-            } catch (e) {
-                console.log(e)
-            }
-        }, 1e3)
-    }
-}! function (e) {
+! function (e) {
     "use strict";
 
     function t(n) {
@@ -228,36 +26,7 @@ function initMap() {
                     let t = e('[data-dsn-header="project"]');
                     t.length <= 0 ? o.addClass("menu-light") : t.hasClass("header-hero-2") && o.addClass("menu-light")
                 } else o.removeClass("v-light")
-            }(), background(), initMap(),
-            function () {
-                const t = e(".filtering");
-                var n = e(".gallery").isotope({
-                    itemSelector: ".item",
-                    transitionDuration: "0.5s"
-                });
-                t.on("click", "button", function () {
-                    var t = e(this).attr("data-filter");
-                    n.isotope({
-                        filter: t
-                    })
-                }), t.on("click", "button", function () {
-                    e(this).addClass("active").siblings().removeClass("active");
-                    let t = i;
-                    r.isScroller(!0) && (t = r.getScrollbar()), setTimeout(function () {
-                        TweenLite.to(t, 1.5, {
-                            scrollTo: n.offset().top - 150,
-                            ease: Expo.easeInOut
-                        })
-                    }, 500)
-                }), n.find("video").each(function () {
-                    this.pause();
-                    e(this).parents(".item").find("> a").on("mouseenter", function () {
-                        e(this).parents(".item").find("video")[0].play()
-                    }).on("mouseleave", function () {
-                        e(this).parents(".item").find("video")[0].pause()
-                    })
-                })
-            }(), SliderProject(), slick_client(i),
+            }(), background(),
             function (n) {
                 const r = "dsn-effect-animate",
                     l = '[data-dsn-ajax="img"]';
@@ -280,19 +49,7 @@ function initMap() {
                             }
                         })
                     },
-                    ajaxSlider: function (t, n) {
-                        let a = this,
-                            i = t.parents(".slide-content").data("dsn-id"),
-                            o = e('.dsn-slider .slide-item[data-dsn-id="' + i + '"] .cover-bg').first(),
-                            s = n;
-                        void 0 !== s && TweenMax.to(".project-metas , .nav-slider ,.footer-slid ,.view-all , .dsn-all-work ", .8, {
-                            autoAlpha: 0,
-                            scale: .8,
-                            onComplete: function () {
-                                o.removeClass("hidden"), o.find("img").addClass("hidden"), a.createElement(o, s, e(".dsn-root-slider"))
-                            }
-                        })
-                    },
+
                     ajaxList: function (t, n) {
                         let a = this,
                             i = e(".nav-work-img-box img.dsn-active").first(),
@@ -305,38 +62,6 @@ function initMap() {
                                 }, 1e3)
                             }
                         })
-                    },
-                    ajaxNextProject: function (e, t) {
-                        let n = this,
-                            a = e.parents(".next-project"),
-                            i = a.find(".bg-image").first(),
-                            o = t;
-                        void 0 !== o && (TweenMax.to("footer", .8, {
-                            autoAlpha: 0,
-                            y: -50
-                        }), TweenMax.staggerTo(a.find(".project-title").find("span , h5"), .8, {
-                            autoAlpha: 0,
-                            y: -50
-                        }, .1, function () {
-                            n.createElement(i, o, a.find(".bg"))
-                        }))
-                    },
-                    ajaxBlog: function (e, t) {
-                        let n = this,
-                            a = e.parents(".post-list-item").find(".bg").first(),
-                            i = t;
-                        void 0 !== i && (TweenMax.to(a.find("img"), .8, {
-                            scale: 1,
-                            height: "100%",
-                            top: 0,
-                            y: "0%"
-                        }), TweenMax.to(".post-list-item-content", .8, {
-                            autoAlpha: 0,
-                            scale: .8,
-                            onComplete: function () {
-                                n.createElement(a.find("img"), i)
-                            }
-                        }))
                     },
                     ajaxWork: function (e, t) {
                         let n = e.find("img");
@@ -539,117 +264,9 @@ function initMap() {
                 if (void 0 !== t && !0 === t) return void n();
                 if (e("body").hasClass("dsn-large-mobile")) return;
                 dsnGrid.mouseMove(i), n()
-            }(n), e(".client-see .slick-slider  ").slick({
-                infinite: !0,
-                slidesToShow: 1,
-                arrows: !1,
-                dots: !0,
-                fade: !0,
-                cssEase: "linear"
-            }), e(' .our-news .slick-slider , .our-team .slick-slider , [data-dsn-col="2"] .slick-slider').slick({
-                infinite: !0,
-                slidesToShow: 2,
-                arrows: !1,
-                dots: !0,
-                responsive: [{
-                    breakpoint: 800,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }]
-            }), e('[data-dsn-col="3"] .slick-slider').slick({
-                infinite: !0,
-                slidesToShow: 3,
-                arrows: !1,
-                dots: !0,
-                autoplay: !0,
-                responsive: [{
-                    breakpoint: 800,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                }, {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }]
-            }), e(".gallery-col .box-im .image-zoom").magnificPopup({
-                delegate: "a",
-                type: "image",
-                closeOnContentClick: !1,
-                closeBtnInside: !1,
-                gallery: {
-                    enabled: !0
-                },
-                zoom: {
-                    enabled: !0,
-                    duration: 300,
-                    opener: function (e) {
-                        return e.find("img")
-                    }
-                }
-            }),
-            function () {
-                var t = e(".gallery-portfolio");
-                if (t.length < 1) return;
-                t.justifiedGallery({
-                    rowHeight: 300,
-                    margins: 15
-                }), t.magnificPopup({
-                    delegate: "a",
-                    type: "image",
-                    closeOnContentClick: !1,
-                    closeBtnInside: !1,
-                    mainClass: "mfp-with-zoom",
-                    gallery: {
-                        enabled: !0
-                    },
-                    zoom: {
-                        enabled: !0,
-                        duration: 300,
-                        easing: "ease-in-out",
-                        opener: function (e) {
-                            return e.find("img")
-                        }
-                    },
-                    callbacks: {
-                        open: function () {
-                            e("html").css({
-                                margin: 0
-                            })
-                        },
-                        close: function () {}
-                    }
-                })
-            }(),
-            function () {
-                const t = e(".view-all");
-                if (t.length <= 0) return;
-                t.on("click", function () {
-                    o.toggleClass("dsn-show-work")
-                });
-                const n = e(".nav-work-box").find(".work-item"),
-                    a = e(".nav-work-img-box");
-                n.each(function (t) {
-                    let n = e(this);
-                    n.attr("data-dsn-id", t);
-                    let i = n.find("img");
-                    i.attr("data-dsn-id", t), n.hasClass("dsn-active") && i.addClass("dsn-active"), a.append(i)
-                }), n.on("mouseenter", function () {
-                    let t = function (e) {
-                        let t = e.data("dsn-id");
-                        return a.find('img[data-dsn-id="' + t + '"]')
-                    }(e(this));
-                    if (t.hasClass("dsn-active") || o.hasClass("dsn-ajax-effect")) return;
-                    n.removeClass("dsn-active"), e(this).addClass("dsn-active");
-                    let i = a.find(".dsn-active");
-                    a.find("img").removeClass("dsn-active").removeClass("dsn-active-enter").removeClass("dsn-active-leve"), i.addClass("dsn-active-leve"), t.addClass("dsn-active dsn-active-enter")
-                })
-            }(),
+            }(n),  
+
+
             function () {
                 const t = e(".dsn-slider"),
                     n = 1.2;
@@ -665,40 +282,8 @@ function initMap() {
                             dsnGrid.convertTextLine(i, i)
                         })
                     },
-                    progress: function (e) {
-                        e.on("progress", function () {
-                            let e = this;
-                            for (let t = 0; t < e.slides.length; t++) {
-                                let n = e.slides[t].progress,
-                                    a = .5 * e.width,
-                                    i = n * a;
-                                e.slides[t].querySelector(".image-bg").style.transform = "translateX(" + i + "px) "
-                            }
-                        })
-                    },
-                    slideChange: function (a) {
-                        var i = this;
-                        a.on("slideChange", function () {
-                            let o = t.find(".dsn-slider-content .dsn-active"),
-                                s = o.data("dsn-id");
-                            let r = e(a.slides[a.activeIndex]).data("dsn-id");
-                            if (s === r) return;
-                            t.find('[data-dsn="video"] video').each(function () {
-                                this.pause()
-                            });
-                            let l = e(this.slides[this.activeIndex]).find('[data-dsn="video"] video');
-                            l.length > 0 && l[0].play();
-                            let d = o.find(".dsn-chars-wrapper");
-                            o.removeClass("dsn-active-cat");
-                            let c = t.find('.dsn-slider-content [data-dsn-id="' + r + '"]'),
-                                u = c.find(".dsn-chars-wrapper"),
-                                f = s > r,
-                                h = new TimelineLite;
-                            h.staggerFromTo(dsnGrid.randomObjectArray(d, .3), .3, i.showText().title, i.hideText(f).title, .1, 0, function () {
-                                t.find(".dsn-slider-content .slide-content").removeClass("dsn-active"), t.find(".dsn-slider-content .slide-content").removeClass("dsn-active-cat"), c.addClass("dsn-active"), c.addClass("dsn-active-cat")
-                            }), h.staggerFromTo(dsnGrid.randomObjectArray(u, n), n, i.hideText(f).title, i.showText().title, .1, "-=.8")
-                        })
-                    },
+      
+
                     showText: function () {
                         return {
                             title: {
@@ -746,36 +331,7 @@ function initMap() {
                             for (let n = 0; n < t.slides.length; n++) t.slides[n].style.transition = e + "ms", t.slides[n].querySelector(".image-bg").style.transition = e + "ms"
                         })
                     },
-                    swiperObject: function () {
-                        return new Swiper(".dsn-slider .slide-inner", {
-                            speed: 1500,
-                            allowTouchMove: !0,
-                            resistanceRatio: .65,
-                            navigation: {
-                                nextEl: ".dsn-slider .control-nav .next-container",
-                                prevEl: ".dsn-slider .control-nav .prev-container"
-                            },
-                            pagination: {
-                                el: ".dsn-slider .footer-slid .control-num span",
-                                type: "custom",
-                                clickable: !0,
-                                renderCustom: function (e, t, n) {
-                                    return dsnGrid.numberText(t)
-                                }
-                            },
-                            on: {
-                                init: function () {
-                                    this.autoplay.stop(), t.find('[data-dsn="video"] video').each(function () {
-                                        this.pause()
-                                    })
-                                },
-                                imagesReady: function () {
-                                    let t = e(this.slides[this.activeIndex]).find('[data-dsn="video"] video');
-                                    t.length > 0 && t[0].play()
-                                }
-                            }
-                        })
-                    },
+
                     run: function () {
                         if (t.length <= 0) return;
                         this.initSlider();
@@ -793,7 +349,7 @@ function initMap() {
                         n.controller.control = a, a.controller.control = n
                     }
                 }
-            }().run(), e("a.vid").YouTubePopUp(), contactValidator()
+            }().run()
     }
 
     function n() {
@@ -894,89 +450,7 @@ function initMap() {
         s = {
             animateTextAjax: '.headefr-fexid .project-title .title-text-header .cat ,[data-dsn-animate="ajax"] , footer, .next-project , .root-project'
         };
-    (navigator.userAgent.match(/Edge/i) || navigator.userAgent.match(/MSIE 10/i) || navigator.userAgent.match(/MSIE 9/i)) && e(".cursor").css("display", "none"),
-        function () {
-            var t = e(".preloader"),
-                n = t.find(".preloader-block"),
-                a = n.find(".percent"),
-                o = n.find(".title"),
-                s = n.find(".loading"),
-                r = t.find(".preloader-bar"),
-                l = r.find(".preloader-progress"),
-                d = t.find(".preloader-after"),
-                c = t.find(".preloader-before"),
-                u = dsnGrid.pageLoad(0, 100, 300, function (e) {
-                    a.text(e), l.css("width", e + "%")
-                });
-            i.on("load", function () {
-                clearInterval(u), TweenMax.fromTo(l, .5, {
-                    width: "95%"
-                }, {
-                    width: "100%",
-                    onUpdate: function () {
-                        var e = l.width() / l.parent().width() * 100;
-                        a.text(parseInt(e, 10))
-                    },
-                    onComplete: function () {
-                        TweenMax.to(r, .5, {
-                            left: "100%"
-                        }), TweenMax.to(o, 1, {
-                            autoAlpha: 0,
-                            y: -100
-                        }), TweenMax.to(s, 1, {
-                            autoAlpha: 0,
-                            y: 100
-                        }), TweenMax.to(a, 1, {
-                            autoAlpha: 0
-                        }), TweenMax.to(c, 1, {
-                            y: "-100%",
-                            delay: .7
-                        }), TweenMax.to(d, 1, {
-                            y: "100%",
-                            delay: .7,
-                            onComplete: function () {
-                                t.addClass("hidden")
-                            }
-                        })
-                    }
-                })
-            })
-        }(),
-        function () {
-            var t = e(".menu-icon");
-            e(".site-header .custom-drop-down > a").on("click", function () {
-                return !1
-            }), i.on("load", function () {
-                const n = e(".site-header nav > ul");
-                if (n.length <= 0) return;
-                let a = n[0].outerHTML;
-                (a = e(a)).attr("class", "nav__list"), a.find("li.custom-drop-down").attr("class", "nav__list-dropdown"), a.find("li").addClass("nav__list-item");
-                let i = e(".header-top .nav .nav__content");
-                void 0 !== i && i.prepend(a), t.on("click", function () {
-                    o.toggleClass("nav-active")
-                }), e(".nav__list-item:not(.nav__list-dropdown) ").on("click", function () {
-                    o.removeClass("nav-active")
-                }), e(".nav__list-dropdown > a").on("click", function (t) {
-                    t.preventDefault();
-                    var n = e(this).parent(),
-                        a = n.find("ul").css("display");
-                    e(".nav__list-dropdown").find("ul").slideUp("slow"), "block" !== a && n.find("ul").slideDown("slow")
-                })
-            }), i.on("scroll", function () {
-                var t = i.scrollTop(),
-                    n = e(".site-header , .header-top"),
-                    a = e(".page-content").offset(),
-                    o = 70;
-                void 0 !== a && (o = a.top), t > o ? (n.addClass("header-stickytop"), e(".sections").addClass("body-pt")) : (n.removeClass("header-stickytop"), e("body").css("paddingTop", 0))
-            });
-            var n = e(".header-top .header-container .menu-icon .text-menu");
-            if (!(n.length <= 0)) {
-                var a = n.find(".text-button"),
-                    s = n.find(".text-open"),
-                    r = n.find(".text-close");
-                dsnGrid.convertTextWord(a, a, !0), dsnGrid.convertTextWord(s, s, !0), dsnGrid.convertTextWord(r, r, !0)
-            }
-        }();
+
     var r = a(),
         l = function () {
             var t = new ScrollMagic.Controller;
@@ -1040,34 +514,7 @@ function initMap() {
                         u.length > 0 && u.get(0).pause(), o.hasClass("v-light") && !e(n).hasClass("header-hero-2") && o.addClass("menu-light")
                     })), c
                 },
-                nextProject: function () {
-                    let n = e("#dsn-next-parallax-img"),
-                        i = e("#dsn-next-parallax-title"),
-                        s = !(n.length <= 0) && new ScrollMagic.Scene({
-                            triggerElement: a,
-                            triggerHook: 1,
-                            duration: "100%"
-                        }).setTween(TweenMax.to(n, 1, {
-                            force3D: !0,
-                            y: "30%",
-                            scale: 1
-                        }, 0)).addTo(t),
-                        l = !(i.length <= 0) && new ScrollMagic.Scene({
-                            triggerElement: a,
-                            triggerHook: .5,
-                            duration: "55%"
-                        }).setTween(TweenMax.to(i, 1, {
-                            force3D: !0,
-                            top: "0%",
-                            opacity: 1,
-                            ease: Power0.easeNone
-                        }, 0)).addTo(t);
-                    r.getListener(function (e) {
-                        !1 !== s && s.refresh(), !1 !== l && l.refresh()
-                    }), !1 !== l && o.hasClass("v-light") && l.on("progress", function (e) {
-                        e.progress > .8 ? o.removeClass("menu-light") : o.addClass("menu-light")
-                    })
-                },
+
                 parallaxImg: function () {
                     e('[data-dsn-grid="move-up"]').each(function () {
                         let n = e(this);
@@ -1143,63 +590,14 @@ function initMap() {
                         t.hasClass("image-zoom") && (i = !0), dsnGrid.parallaxMoveElemnt(t, a, n, void 0, i)
                     })
                 },
-                changeColor: function () {
-                    const n = "v-light";
-                    var a = o.hasClass(n);
-                    e('[data-dsn="color"]').each(function () {
-                        let i = dsnGrid.getUndefinedVal(e(this).data("dsn-duration"), e(this).outerHeight() + 70);
-                        var s = new ScrollMagic.Scene({
-                            triggerElement: this,
-                            triggerHook: .05,
-                            duration: i
-                        }).addTo(t);
-                        s.on("enter", function () {
-                            a ? o.removeClass(n) : o.addClass(n)
-                        }), s.on("leave", function () {
-                            a ? o.addClass(n) : o.removeClass(n)
-                        }), r.getListener(function () {
-                            s.refresh()
-                        })
-                    })
-                },
-                animateText: function () {
-                    e('[data-dsn-animate="text"] , [data-dsn-animate="up"]').each(function () {
-                        let n = e(this),
-                            a = 1;
-                        "text" === n.data("dsn-animate") ? (dsnGrid.convertTextWord(n, n), n.attr("data-dsn-animate", "animate")) : a = .8;
-                        var i = new ScrollMagic.Scene({
-                            triggerElement: this,
-                            reverse: !1,
-                            triggerHook: a
-                        }).setClassToggle(this, "dsn-active").addTo(t);
-                        r.getListener(function () {
-                            i.refresh()
-                        })
-                    })
-                },
-                headerBlog: function () {
-                    const n = e('[data-dsn-header="blog"]');
-                    if (!(n.length <= 0 || i.width() < 992)) {
-                        var a = new ScrollMagic.Scene({
-                            triggerElement: ".header-single-post",
-                            triggerHook: 0,
-                            duration: "100%"
-                        }).setTween(TweenMax.fromTo(n, 1, {
-                            width: "100%"
-                        }, {
-                            width: "80%"
-                        })).addTo(t);
-                        r.getListener(function () {
-                            a.refresh()
-                        })
-                    }
-                },
+
+
                 allInt: function () {
                     this.clearControl();
                     let e = this.headerProject();
                     r.getListener(function (t) {
                         !1 !== e && e.refresh()
-                    }), this.nextProject(), this.parallaxImgHover(), this.parallaxImg(), this.moveSection(), this.animateText(), this.changeColor()
+                    }),  this.parallaxImgHover(), this.parallaxImg(), this.moveSection()
                 }
             }
         }();
@@ -1207,5 +605,5 @@ function initMap() {
         e("main.main-root").load(document.location + " main.main-root > *", function () {
             t(!0), a().unlocked()
         })
-    }), contactValidator(), n()
+    }),  n()
 }(jQuery);
